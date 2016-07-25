@@ -4,10 +4,17 @@ import sentenceSender
 import webListener
 from snowboy import snowboydecoder
 
+interrupted = False
 
-def ehi_vicky(detector):
+
+def request_shutdown():
+    global interrupted
+    interrupted = True
+
+
+def activation_detected(detector):
     # Notify that the how keyword has been detected
-    print "Said : Hei vicky"
+    print "Speak now!"
     snowboydecoder.play_audio_file(snowboydecoder.DETECT_DING)
     # Shut down the keywords lister
     detector.terminate()
@@ -29,15 +36,16 @@ def cancel():
 
 
 def interrupt_callback():
-    return False  # TODO This is not the proper way.. Ask someone that knows python
+    global interrupted
+    return interrupted
 
 
 def start():
     # Configure keyword listener
-    models = ["resources/vicky.pmdl", "resources/cancel.pmdl"]
-    sensitivity = [0.5] * len(models)
+    models = ["resources/jarvis.pmdl", "resources/cancel.pmdl"]
+    sensitivity = [0.55] * len(models)
     detector = snowboydecoder.HotwordDetector(models, sensitivity=sensitivity)
-    callbacks = [lambda: ehi_vicky(detector),
+    callbacks = [lambda: activation_detected(detector),
                  cancel]
     # Start keyword listener
     print "Waiting for the keyword !"

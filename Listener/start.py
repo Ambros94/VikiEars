@@ -6,17 +6,12 @@
 # Global variable used to interrupt the system
 import signal
 
-import sentenceSender
 from listeners import magicListener
-
-interrupted = False
 
 
 def signal_handler(signal, frame):
-    print "Manual shutdown requested !"  # TODO Stop the listening callback
-    global interrupted
-    interrupted = True
-    sentenceSender.close()
+    print "Manual shutdown requested !"
+    magicListener.request_shutdown()
 
 
 # capture SIGINT signal, e.g., Ctrl+C

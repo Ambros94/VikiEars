@@ -24,12 +24,14 @@ def init_connection():
 
 
 def send(message):
+    global socket
     if socket is None:
         init_connection()
     print message + "<- this is the message"
     # Send the message on the socket and print the result
-    socket.emit("command", message)
+    socket.emit("textCommand", message)
 
 
 def close():
-    socket.close()
+    global socket
+    socket.disconnect()
