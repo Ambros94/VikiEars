@@ -17,4 +17,4 @@ def signal_handler(signal, frame):
 # capture SIGINT signal, e.g., Ctrl+C
 signal.signal(signal.SIGINT, signal_handler)
 # Start the listener that detects the keywords
-magicListener.start()
+magicListener.startKeyword()

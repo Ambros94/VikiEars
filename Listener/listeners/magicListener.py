@@ -18,15 +18,20 @@ def activation_detected(detector):
     # Shut down the keywords lister
     detector.terminate()
     # Start sentenceListener
+    startSentence()
+
+
+def startSentence():
     try:
         heard = webListener.start_listening()
         socketManager.send(heard)
     except sr.UnknownValueError:
+        snowboydecoder.play_audio_file(snowboydecoder.DETECT_DONG)
+        startKeyword()
         print("Speech Recognition could not understand audio")
     except sr.RequestError as e:
+        snowboydecoder.play_audio_file(snowboydecoder.DETECT_DONG)
         print("Could not request results from Speech Recognition service; {0}".format(e))
-    # Restart keyword listener
-    start()
 
 
 def cancel():
@@ -39,7 +44,7 @@ def interrupt_callback():
     return interrupted
 
 
-def start():
+def startKeyword():
     # Configure keyword listener
     models = ["resources/jarvis.pmdl", "resources/cancel.pmdl"]
     sensitivity = [0.45] * len(models)

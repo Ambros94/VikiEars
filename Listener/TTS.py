@@ -2,7 +2,7 @@ import random
 from os import system
 
 unknown_response = ["I do not know what u said"]
-ok_response = ["Done.", "Ok.", "Perfect.", "Fantastic"]
+ok_response = ["Done.", "Ok.", "Perfect.", "As you said.", "Yes Sir.", "As you wish"]
 confidence_response = ["Rephrase it", "I am not so sure about what you said"]
 number_response = ["Missing a value", "Number missing"]
 location_response = ["Where?", "Missing location"]

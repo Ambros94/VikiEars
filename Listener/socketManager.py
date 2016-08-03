@@ -6,33 +6,32 @@ socket = None
 
 
 def textCommandResponse(*args):
+    from listeners import magicListener
     response_status = args[0]
     print "ResponseStatus:" + response_status
     if response_status == "UNKNOWN":
         TTS.say(TTS.unknown_response)
-        return
-    if response_status == "OK":
+    elif response_status == "OK":
+        # Special case. All completed, W8 for next hotKey
         TTS.say(TTS.ok_response)
+        magicListener.startKeyword()
         return
-    if response_status == "LOW_CONFIDENCE":
+    elif response_status == "LOW_CONFIDENCE":
         TTS.say(TTS.confidence_response)
-        return
-    if response_status == "MISSING_NUMBER":
+    elif response_status == "MISSING_NUMBER":
         TTS.say(TTS.number_response)
-        return
-    if response_status == "MISSING_LOCATION":
+    elif response_status == "MISSING_LOCATION":
         TTS.say(TTS.location_response)
-        return
-    if response_status == "MISSING_COLOR":
+    elif response_status == "MISSING_COLOR":
         TTS.say(TTS.color_response)
-        return
-    if response_status == "MISSING_DATETIME":
+    elif response_status == "MISSING_DATETIME":
         TTS.say(TTS.dateTime_response)
-        return
-    if response_status == "MISSING_FREE_TEXT":
+    elif response_status == "MISSING_FREE_TEXT":
         TTS.say(TTS.freeTextResponse)
-        return
-    TTS.error()
+    else:
+        TTS.error()
+    # W8 for the next sentence
+    magicListener.startSentence()
 
 
 def init_connection():
