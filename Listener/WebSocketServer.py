@@ -3,7 +3,7 @@ import tornado.web as tw
 import tornado.httpserver as th
 import tornado.websocket as tws
 import tornado.ioloop
-import socket as so
+import socketManager as so
 
 class MyWebSocketServer(tws.WebSocketHandler):
     def open(self):

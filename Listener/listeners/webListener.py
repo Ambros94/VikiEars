@@ -8,6 +8,9 @@ def recognize(recognize_function):
 def start_listening():
     r = sr.Recognizer()
     with sr.Microphone() as source:
+        from snowboy import snowboydecoder
+        snowboydecoder.play_audio_file(snowboydecoder.DETECT_DING)
+
         print("Say something!")
         audio = r.listen(source)
         # recognize speech using Google Speech Recognition
@@ -16,5 +19,4 @@ def start_listening():
 
         heard = recognize(lambda: r.recognize_google(audio))  # , recognize(sphinxRecognizer)
         print heard
-        print("Google Speech Recognition thinks you said: " + heard)
         return heard

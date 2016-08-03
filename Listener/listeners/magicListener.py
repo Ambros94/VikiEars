@@ -1,6 +1,6 @@
 import speech_recognition as sr
 
-import sentenceSender
+import socketManager
 import webListener
 from snowboy import snowboydecoder
 
@@ -15,13 +15,12 @@ def request_shutdown():
 def activation_detected(detector):
     # Notify that the how keyword has been detected
     print "Speak now!"
-    snowboydecoder.play_audio_file(snowboydecoder.DETECT_DING)
     # Shut down the keywords lister
     detector.terminate()
     # Start sentenceListener
     try:
         heard = webListener.start_listening()
-        sentenceSender.send(heard)
+        socketManager.send(heard)
     except sr.UnknownValueError:
         print("Speech Recognition could not understand audio")
     except sr.RequestError as e:
@@ -43,7 +42,7 @@ def interrupt_callback():
 def start():
     # Configure keyword listener
     models = ["resources/jarvis.pmdl", "resources/cancel.pmdl"]
-    sensitivity = [0.55] * len(models)
+    sensitivity = [0.45] * len(models)
     detector = snowboydecoder.HotwordDetector(models, sensitivity=sensitivity)
     callbacks = [lambda: activation_detected(detector),
                  cancel]
