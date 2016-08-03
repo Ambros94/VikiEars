@@ -9,6 +9,8 @@ location_response = ["Where?", "Missing location"]
 color_response = ["You must give me the color", "A color is missing"]
 dateTime_response = ["When ?", "Missing date", "Missing time"]
 freeTextResponse = ["Do What ?", "I miss your argument"]
+teach_response = ["Tell me the right thing to to", "I am ready to learn"]
+learned_response = ["I got it", "Learned"]
 
 
 def say(sentence_array):

@@ -24,6 +24,10 @@ def textCommandResponse(*args):
         TTS.say(TTS.location_response)
     elif response_status == "MISSING_COLOR":
         TTS.say(TTS.color_response)
+    elif response_status == "TEACH":
+        TTS.say(TTS.teach_response)
+    elif response_status == "LEARNED":
+        TTS.say(TTS.learned_response)
     elif response_status == "MISSING_DATETIME":
         TTS.say(TTS.dateTime_response)
     elif response_status == "MISSING_FREE_TEXT":
