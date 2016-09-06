@@ -13,7 +13,7 @@ def textCommandResponse(*args):
         TTS.say(TTS.unknown_response)
     elif response_status == "OK":
         # Special case. All completed, W8 for next hotKey
-        TTS.say(TTS.ok_response)
+        # TTS.say(TTS.ok_response)
         magicListener.startKeyword()
         return
     elif response_status == "LOW_CONFIDENCE":

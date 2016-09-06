@@ -34,11 +34,6 @@ def startSentence():
         print("Could not request results from Speech Recognition service; {0}".format(e))
 
 
-def cancel():
-    print "Said : Vicky delete"
-    snowboydecoder.play_audio_file(snowboydecoder.DETECT_DONG)
-
-
 def interrupt_callback():
     global interrupted
     return interrupted
@@ -46,11 +41,10 @@ def interrupt_callback():
 
 def startKeyword():
     # Configure keyword listener
-    models = ["resources/jarvis.pmdl", "resources/cancel.pmdl"]
+    models = ["resources/jarvis.pmdl"]
     sensitivity = [0.45] * len(models)
     detector = snowboydecoder.HotwordDetector(models, sensitivity=sensitivity)
-    callbacks = [lambda: activation_detected(detector),
-                 cancel]
+    callbacks = [lambda: activation_detected(detector)]
     # Start keyword listener
     print "Waiting for the keyword !"
     detector.start(detected_callback=callbacks,
